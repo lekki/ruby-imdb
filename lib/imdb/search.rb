@@ -46,14 +46,15 @@ module IMDB
   end # Search
 
   class Result < IMDB::Skeleton
-    def initialize(imdb_id, title, link)
+    def initialize(imdb_id, title, link, year = nil)
       super("Result",{
         :title => String,
         :link => String,
-        :imdb_id => String}, [:imdb_id])
+        :imdb_id => String, :year => Integer}, [:imdb_id])
       @title   = title
       @link    = link
       @imdb_id = imdb_id
+      @year = year
     end
 
     def title
@@ -66,6 +67,10 @@ module IMDB
 
     def imdb_id
       @imdb_id
+    end
+
+    def year
+      @year
     end
 
     def movie
