@@ -34,27 +34,32 @@ module IMDB
     end
 
     def result_list(doc)
-      @ret_val = doc.search('a[@href^="/title/tt"]').reduce([]) do |ret_val,node|
-        unless node.content.blank?
-          link =  "http://www.imdb.com#{node['href']}"
-          id   = node["href"][/\d+/]
-          ret_val << IMDB::Result.new(id, node.content, link)
-        end
-        ret_val
+      @ret_val = doc.search('td[@class="result_text"]').reduce([]) do |ret_val, node|
+         p node
+         id =  node.children[1]["href"][/\d+/]
+         link =  "http://www.imdb.com#{node.children[1]['href']}"
+         year =  node.children[2].to_s.gsub(/[\s\(\)]/, '').to_i
+         title =  node.children[1].content
+         aka = node.children[5].content.gsub(/[\"]/, '')
+         ret_val << IMDB::Result.new(id, title, link, year, aka)
+         ret_val
       end
     end
   end # Search
 
   class Result < IMDB::Skeleton
-    def initialize(imdb_id, title, link, year = nil)
+    def initialize(imdb_id, title, link, year = nil, aka = nil)
       super("Result",{
         :title => String,
         :link => String,
-        :imdb_id => String, :year => Integer}, [:imdb_id])
+        :imdb_id => String,
+        :year => Integer,
+        :aka => String}, [:imdb_id])
       @title   = title
       @link    = link
       @imdb_id = imdb_id
       @year = year
+      @aka = aka
     end
 
     def title
@@ -71,6 +76,10 @@ module IMDB
 
     def year
       @year
+    end
+
+    def aka
+      @aka
     end
 
     def movie
