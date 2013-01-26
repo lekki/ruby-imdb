@@ -38,7 +38,6 @@ module IMDB
 
     def result_list(doc)
       @ret_val = doc.search('td[@class="result_text"]').reduce([]) do |ret_val, node|
-         p node
          id =  node.children[1]["href"][/\d+/]
          link =  "http://www.imdb.com#{node.children[1]['href']}"
          year =  node.children[2].to_s.gsub(/[\s\(\)]/, '').to_i
