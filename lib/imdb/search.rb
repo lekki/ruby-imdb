@@ -1,7 +1,10 @@
 module IMDB
   class Search
-    def movie(keyword)
-      doc = Nokogiri::HTML(open("http://www.imdb.com/find?s=tt&q=#{CGI.escape(keyword)}"))
+    def movie(keyword, options = {:exact => false})
+      url = "http://www.imdb.com/find?s=tt&q=#{CGI.escape(keyword)}"
+      url += "&exact=true" if options.key?(:exact) && options[:exact]
+
+      doc = Nokogiri::HTML(open(url))
       @ret_val = []
       if doc.at("h1.header")   # we're already being redirected to movie's page
         single_result(doc)
