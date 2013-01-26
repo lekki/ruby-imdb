@@ -43,7 +43,7 @@ module IMDB
          link =  "http://www.imdb.com#{node.children[1]['href']}"
          year =  node.children[2].to_s.gsub(/[\s\(\)]/, '').to_i
          title =  node.children[1].content
-         aka = node.children[5].content.gsub(/[\"]/, '')
+         aka =  node.children.length >= 6 ? node.children[5].content.gsub(/[\"]/, '') : nil
          ret_val << IMDB::Result.new(id, title, link, year, aka)
          ret_val
       end
