@@ -40,7 +40,8 @@ module IMDB
       @ret_val = doc.search('td[@class="result_text"]').reduce([]) do |ret_val, node|
          id =  node.children[1]["href"][/\d+/]
          link =  "http://www.imdb.com#{node.children[1]['href']}"
-         year =  node.children[2].to_s.gsub(/[\s\(\)]/, '').to_i
+
+         year =  node.children[2].to_s.gsub(/[^0-9]/, "").to_i
          title =  node.children[1].content
          aka =  node.children.length >= 6 ? node.children[5].content.gsub(/[\"]/, '') : nil
          ret_val << IMDB::Result.new(id, title, link, year, aka)
