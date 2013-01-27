@@ -28,7 +28,9 @@ module IMDB
     # Get movie poster address
     # @return [String]
     def poster
-      doc.at("#img_primary img")["src"]
+      node = doc.at("#img_primary img")
+      return nil if node.nil
+      node["src"]
     end
 
     # Get movie title
