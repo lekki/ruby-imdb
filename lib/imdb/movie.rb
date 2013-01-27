@@ -29,7 +29,7 @@ module IMDB
     # @return [String]
     def poster
       node = doc.at("#img_primary img")
-      return nil if node.nil
+      return nil if node.blank?
       node["src"]
     end
 
