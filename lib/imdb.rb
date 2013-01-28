@@ -3,7 +3,6 @@ require "open-uri"
 
 require "nokogiri"
 require "json"
-require "mongo_mapper"
 require "chronic"
 
 class Array

@@ -60,21 +60,15 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<nokogiri>, [">= 1.4.1"])
       s.add_runtime_dependency(%q<json>, [">= 1.4.3"])
-      s.add_runtime_dependency(%q<mongo>, [">= 1.0.1"])
-      s.add_runtime_dependency(%q<mongo_mapper>, [">= 0.7.5"])
       s.add_runtime_dependency(%q<chronic>, [">= 0.2.3"])
     else
       s.add_dependency(%q<nokogiri>, [">= 1.4.1"])
       s.add_dependency(%q<json>, [">= 1.4.3"])
-      s.add_dependency(%q<mongo>, [">= 1.0.1"])
-      s.add_dependency(%q<mongo_mapper>, [">= 0.7.5"])
       s.add_dependency(%q<chronic>, [">= 0.2.3"])
     end
   else
     s.add_dependency(%q<nokogiri>, [">= 1.4.1"])
     s.add_dependency(%q<json>, [">= 1.4.3"])
-    s.add_dependency(%q<mongo>, [">= 1.0.1"])
-    s.add_dependency(%q<mongo_mapper>, [">= 0.7.5"])
     s.add_dependency(%q<chronic>, [">= 0.2.3"])
   end
 end
